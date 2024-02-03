@@ -81,6 +81,8 @@ with st.sidebar:
 if choice == "Upload Image":
     st.subheader("Upload Image")
     session_state.img = st.file_uploader("Choose an image...", type="jpg")
+    st.markdown(
+        "[Donwload the test images](https://drive.google.com/uc?export=download&id=1Hj_ybQGQYfs1qih6HwfEnd0m5Y231ceU)")
     if session_state.img is not None:
         st.image(session_state.img, caption=f"Uploaded Image",
                  width=300, use_column_width='auto')
