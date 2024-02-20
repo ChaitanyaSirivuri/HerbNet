@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyD0_smZY0nvfVmdaRgm6PIMV1Dzr2cb5Tc")
+genai.configure(api_key="")
 
 model_gemini = genai.GenerativeModel('gemini-pro')
 
