@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 import google.generativeai as genai
 
-genai.configure(api_key="")
+genai.configure(api_key="AIzaSyAHdGoK3fyNHKDZ7vK1lg7gIEAbIbXIlO0")
 
 model_gemini = genai.GenerativeModel('gemini-pro')
 
@@ -54,7 +54,7 @@ def get_herb_benefits(herb):
 
 
 def get_disease_cures(disease):
-    prompt_disease = f'''Assume yourself as an ayurvedic doctor and generate cures for {disease} using herbs from {labels}. Don't use more than two herbs for cures. Use only popular herbs for that particular disease.'''
+    prompt_disease = f'''Assume yourself as an ayurvedic doctor and generate cures for {disease} using herbs from {labels}.If it is serious disease like cancer, thyroid, or anything that requires surgery then please sugest to consult a doctor and don't recommend cures. Don't use more than two herbs for cures instead provide disclaimer. Use only popular herbs for that particular disease.'''
     response = model_gemini.generate_content(prompt_disease)
     return response.text
 
@@ -104,4 +104,18 @@ elif choice == "Herb Benefits":
 
 elif choice == "Disease Diagnosis":
     st.subheader("Disease Diagnosis")
-    st.write(get_disease_cures("cold"))
+    predefined_options = ["Fever", "Cough", "Cold", "Head Ache", "Indigestion",
+                          "Acne", "Insomnia", "Obesity", "Constipation", "Gas and Bloating", "Hair Damage"]
+
+    option = st.selectbox(label="Select from list of diseases",
+                          options=predefined_options + ["Other"])
+
+    if option == "Other":
+        custom_disease = st.text_input("Enter the disease:")
+        submitted = st.button(label='Submit')
+        if submitted:
+            st.write(get_disease_cures(custom_disease))
+    else:
+        submitted = st.button(label='Submit')
+        if submitted:
+            st.write(get_disease_cures(option))
