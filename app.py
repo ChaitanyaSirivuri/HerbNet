@@ -54,7 +54,7 @@ def get_herb_benefits(herb):
 
 
 def get_disease_cures(disease):
-    prompt_disease = f'''Assume yourself as an ayurvedic doctor and generate cures for {disease} using herbs from {labels}.If it is serious disease like cancer, thyroid, or anything that requires surgery then please sugest to consult a doctor and don't recommend cures. Don't use more than two herbs for cures instead provide disclaimer. Use only popular herbs for that particular disease.'''
+    prompt_disease = f'''Assume yourself as an ayurvedic doctor and generate cures for {disease} using herbs from {labels} generate atleast 5 cures.If it is serious disease like cancer, thyroid, or anything that requires surgery then please sugest to consult a doctor and don't recommend cures. Don't use more than two herbs for cures instead provide disclaimer. Use only popular herbs for that particular disease.'''
     response = model_gemini.generate_content(prompt_disease)
     return response.text
 
